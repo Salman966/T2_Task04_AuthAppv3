@@ -13,8 +13,19 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/dashboard/dashboard.component').then((m) => m.DashboardComponent),
     canActivate: [authGuard],
-    resolve: {
-      user: userResolver
-    }
+    resolve: { user: userResolver },
+    children: [
+      {
+        path: 'all-posts',
+        loadComponent: () =>
+          import('./pages/dashboard/all-posts/all-posts.component').then(m => m.AllPostsComponent),
+      },
+      {
+        path: 'my-posts',
+        loadComponent: () =>
+          import('./pages/dashboard/my-posts/my-posts.component').then(m => m.MyPostsComponent),
+      }
+    ]
   }
 ];
+

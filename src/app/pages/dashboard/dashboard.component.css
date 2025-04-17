@@ -1,14 +1,15 @@
 .dashboard {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .user-info {
@@ -30,52 +31,66 @@
 
 .user-details p {
   margin: 0;
-  color: #666;
+  color: #555;
 }
 
 .logout-button {
   background-color: #f44336;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 18px;
   border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
 }
 
 .tabs {
   display: flex;
-  margin-bottom: 20px;
+  justify-content: center;
+  margin-bottom: 25px;
+  gap: 12px;
 }
 
-.tabs button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  background-color: #eee;
-  cursor: pointer;
-  border-radius: 5px 5px 0 0;
+.tabs a {
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  background-color: #e0e0e0;
+  color: #333;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.tabs button.active {
-  background-color: #ccc;
-  font-weight: bold;
+.tabs a.active,
+.tabs a.router-link-active {
+  background-color: #007bff;
+  color: white;
+}
+
+.loading-spinner {
+  text-align: center;
+  font-size: 18px;
+  color: #007bff;
+  padding: 15px;
 }
 
 .posts {
-  border: 1px solid #ccc;
-  border-top: none;
-  padding: 20px;
-  border-radius: 0 0 5px 5px;
-  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .post {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-}
-
-.post:last-child {
-  border-bottom: none;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .post-header {
@@ -86,6 +101,8 @@
 
 .post-header h3 {
   margin: 0;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .post-header button {
@@ -93,19 +110,19 @@
   color: white;
   border: none;
   padding: 6px 12px;
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 14px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .post-header button:hover {
   background-color: #d32f2f;
 }
 
-.loading-spinner {
+.no-posts {
   text-align: center;
-  font-weight: bold;
-  color: #555;
-  padding: 20px;
-  font-size: 18px;
+  color: #999;
+  font-style: italic;
+  margin-top: 30px;
 }
-
