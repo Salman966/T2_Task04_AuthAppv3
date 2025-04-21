@@ -1,0 +1,36 @@
+.post {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .post-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .post-header button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .post-header button:hover {
+    background-color: #d32f2f;
+  }
+  

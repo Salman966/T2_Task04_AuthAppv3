@@ -15,9 +15,5 @@
     <a routerLink="my-posts" routerLinkActive="active">My Posts</a>
   </div>
 
-  <div *ngIf="loading()" class="loading-spinner">
-    Loading...
-  </div>
-
-  <router-outlet *ngIf="!loading()"></router-outlet>
+  <router-outlet></router-outlet>
 </div>

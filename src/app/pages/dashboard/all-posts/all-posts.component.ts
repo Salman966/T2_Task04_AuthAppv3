@@ -1,22 +1,20 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { ReactiveFormsModule, FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import { ApiService } from '../../../services/api.service';
 import { Post } from '../../../models/post.model';
+import { PostItemComponent } from '../post-item/post-item.component';
 
 @Component({
   standalone: true,
   selector: 'app-all-posts',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, PostItemComponent],
   templateUrl: './all-posts.component.html',
   styleUrls: ['./all-posts.component.css']
 })
 export class AllPostsComponent {
-  private http = inject(HttpClient);
-  private fb = inject(FormBuilder);
-
+  private api = inject(ApiService);
   loading = signal(true);
-  postFormArray: FormArray<FormGroup> = new FormArray<FormGroup>([]);
+  posts: Post[] = [];
 
   constructor() {
     this.loadPosts();
@@ -24,17 +22,9 @@ export class AllPostsComponent {
 
   loadPosts() {
     this.loading.set(true);
-    this.http.get<{ posts: Post[] }>('https://dummyjson.com/posts').subscribe({
+    this.api.getAllPosts().subscribe({
       next: (res) => {
-        const groups = res.posts.map((post) =>
-          this.fb.group({
-            id: [post.id],
-            title: [post.title],
-            body: [post.body]
-          })
-        );
-        this.postFormArray.clear();
-        groups.forEach((group) => this.postFormArray.push(group));
+        this.posts = res.posts;
         this.loading.set(false);
       },
       error: () => this.loading.set(false)
@@ -43,17 +33,12 @@ export class AllPostsComponent {
 
   onDelete(postId: number): void {
     this.loading.set(true);
-    this.http.delete(`https://dummyjson.com/posts/${postId}`).subscribe({
+    this.api.deletePost(postId).subscribe({
       next: () => {
-        const index = this.postFormArray.controls.findIndex(ctrl => ctrl.value.id === postId);
-        if (index !== -1) this.postFormArray.removeAt(index);
+        this.posts = this.posts.filter((post) => post.id !== postId);
         this.loading.set(false);
       },
       error: () => this.loading.set(false)
     });
-  }
-
-  get posts(): FormArray<FormGroup> {
-    return this.postFormArray;
   }
 }

@@ -1,18 +1,13 @@
-<div *ngIf="loading()" class="loading-spinner">
-    Loading posts...
+<div class="posts">
+  <app-post-item
+    *ngFor="let post of posts"
+    [title]="post.title"
+    [body]="post.body"
+    [postId]="post.id"
+    (delete)="onDelete($event)">
+  </app-post-item>
+
+  <div *ngIf="posts.length === 0 && !loading()" class="no-posts">
+    You have no posts yet.
   </div>
-  
-  <div *ngIf="!loading() && posts.length > 0" class="posts">
-    <div *ngFor="let postGroup of posts.controls" class="post">
-      <div class="post-header">
-        <h3>{{ postGroup.value.title }}</h3>
-        <button (click)="onDelete(postGroup.value.id)">Delete</button>
-      </div>
-      <p>{{ postGroup.value.body }}</p>
-    </div>
-  </div>
-  
-  <div *ngIf="!loading() && posts.length === 0" class="no-posts">
-    No posts found.
-  </div>
-  
+</div>

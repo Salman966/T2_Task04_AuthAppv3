@@ -16,7 +16,7 @@ export interface LoginResponse {
   lastName: string;
   gender: string;
   image: string;
-  accessToken: string;  
+  accessToken: string;
   refreshToken: string;
 }
 
@@ -52,5 +52,4 @@ export class ApiService {
       }
     });
   }
-  
 }
