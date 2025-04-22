@@ -23,12 +23,10 @@ export class LoginComponent {
     private api: ApiService,
     private authService: AuthService
   ) {
-   
     this.loginForm = this.fb.group({
       identity: ['', Validators.required],
       password: ['', Validators.required]
     });
-
 
     localStorage.removeItem('authUser');
     localStorage.removeItem('authToken');
@@ -39,18 +37,18 @@ export class LoginComponent {
       username: this.loginForm.value.identity,
       password: this.loginForm.value.password
     };
-  
+
     this.api.login(payload).subscribe({
       next: (res: LoginResponse) => {
         const token = res.accessToken;
         localStorage.setItem('authToken', token);
-        this.token = token; 
-  
+        this.token = token;
+
         this.api.getProfile().subscribe({
           next: (profile) => {
-            console.log('Token:', token); 
+            console.log('Token:', token);
             this.authService.setUser({ ...profile, accessToken: token });
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigate(['/dashboard/all-posts']);
           },
           error: (err) => {
             this.error = true;
@@ -64,5 +62,4 @@ export class LoginComponent {
       }
     });
   }
-  
 }

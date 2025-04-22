@@ -16,6 +16,11 @@ export const routes: Routes = [
     resolve: { user: userResolver },
     children: [
       {
+        path: '',
+        redirectTo: 'all-posts',
+        pathMatch: 'full'
+      },
+      {
         path: 'all-posts',
         loadComponent: () =>
           import('./pages/dashboard/all-posts/all-posts.component').then(m => m.AllPostsComponent),
@@ -28,4 +33,3 @@ export const routes: Routes = [
     ]
   }
 ];
-
